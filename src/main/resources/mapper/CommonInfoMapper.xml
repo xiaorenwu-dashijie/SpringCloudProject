@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinoway.cisp.dao.CommonInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sinoway.cisp.entitys.CommonInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sino_cardid" property="sinoCardid" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="data_from" property="dataFrom" jdbcType="VARCHAR" />
+    <result column="common" property="common" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sino_cardid, content, data_from, common
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sinoway.cisp.entitys.CommonInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from common_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from common_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from common_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sinoway.cisp.entitys.CommonInfoExample" >
+    delete from common_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sinoway.cisp.entitys.CommonInfo" >
+    insert into common_info (id, sino_cardid, content, 
+      data_from, common)
+    values (#{id,jdbcType=INTEGER}, #{sinoCardid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{dataFrom,jdbcType=VARCHAR}, #{common,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinoway.cisp.entitys.CommonInfo" >
+    insert into common_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sinoCardid != null" >
+        sino_cardid,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="dataFrom != null" >
+        data_from,
+      </if>
+      <if test="common != null" >
+        common,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sinoCardid != null" >
+        #{sinoCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="dataFrom != null" >
+        #{dataFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="common != null" >
+        #{common,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sinoway.cisp.entitys.CommonInfoExample" resultType="java.lang.Integer" >
+    select count(*) from common_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update common_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sinoCardid != null" >
+        sino_cardid = #{record.sinoCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataFrom != null" >
+        data_from = #{record.dataFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.common != null" >
+        common = #{record.common,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update common_info
+    set id = #{record.id,jdbcType=INTEGER},
+      sino_cardid = #{record.sinoCardid,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      data_from = #{record.dataFrom,jdbcType=VARCHAR},
+      common = #{record.common,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinoway.cisp.entitys.CommonInfo" >
+    update common_info
+    <set >
+      <if test="sinoCardid != null" >
+        sino_cardid = #{sinoCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="dataFrom != null" >
+        data_from = #{dataFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="common != null" >
+        common = #{common,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinoway.cisp.entitys.CommonInfo" >
+    update common_info
+    set sino_cardid = #{sinoCardid,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      data_from = #{dataFrom,jdbcType=VARCHAR},
+      common = #{common,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

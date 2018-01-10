@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinoway.cisp.dao.RoleAuthMapper" >
+  <resultMap id="BaseResultMap" type="com.sinoway.cisp.entitys.RoleAuth" >
+    <id column="role_auth_id" property="roleAuthId" jdbcType="BIGINT" />
+    <result column="role_code" property="roleCode" jdbcType="VARCHAR" />
+    <result column="auth_code" property="authCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    role_auth_id, role_code, auth_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sinoway.cisp.entitys.RoleAuthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from role_auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from role_auth
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from role_auth
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sinoway.cisp.entitys.RoleAuthExample" >
+    delete from role_auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sinoway.cisp.entitys.RoleAuth" >
+    insert into role_auth (role_auth_id, role_code, auth_code
+      )
+    values (#{roleAuthId,jdbcType=BIGINT}, #{roleCode,jdbcType=VARCHAR}, #{authCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinoway.cisp.entitys.RoleAuth" >
+    insert into role_auth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleAuthId != null" >
+        role_auth_id,
+      </if>
+      <if test="roleCode != null" >
+        role_code,
+      </if>
+      <if test="authCode != null" >
+        auth_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleAuthId != null" >
+        #{roleAuthId,jdbcType=BIGINT},
+      </if>
+      <if test="roleCode != null" >
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="authCode != null" >
+        #{authCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sinoway.cisp.entitys.RoleAuthExample" resultType="java.lang.Integer" >
+    select count(*) from role_auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update role_auth
+    <set >
+      <if test="record.roleAuthId != null" >
+        role_auth_id = #{record.roleAuthId,jdbcType=BIGINT},
+      </if>
+      <if test="record.roleCode != null" >
+        role_code = #{record.roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authCode != null" >
+        auth_code = #{record.authCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update role_auth
+    set role_auth_id = #{record.roleAuthId,jdbcType=BIGINT},
+      role_code = #{record.roleCode,jdbcType=VARCHAR},
+      auth_code = #{record.authCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinoway.cisp.entitys.RoleAuth" >
+    update role_auth
+    <set >
+      <if test="roleCode != null" >
+        role_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="authCode != null" >
+        auth_code = #{authCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinoway.cisp.entitys.RoleAuth" >
+    update role_auth
+    set role_code = #{roleCode,jdbcType=VARCHAR},
+      auth_code = #{authCode,jdbcType=VARCHAR}
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </update>
+</mapper>

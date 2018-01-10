@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinoway.cisp.dao.BlacklistMapper" >
+  <resultMap id="BaseResultMap" type="com.sinoway.cisp.entitys.Blacklist" >
+    <id column="sinoId" property="sinoid" jdbcType="VARCHAR" />
+    <result column="overdue_start_time" property="overdueStartTime" jdbcType="TIMESTAMP" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="public_time" property="publicTime" jdbcType="TIMESTAMP" />
+    <result column="sino_cardid" property="sinoCardid" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="live_address" property="liveAddress" jdbcType="VARCHAR" />
+    <result column="overdue_money" property="overdueMoney" jdbcType="DECIMAL" />
+    <result column="loan_location" property="loanLocation" jdbcType="VARCHAR" />
+    <result column="loan_type" property="loanType" jdbcType="VARCHAR" />
+    <result column="loan_start_time" property="loanStartTime" jdbcType="TIMESTAMP" />
+    <result column="loan_guarantee" property="loanGuarantee" jdbcType="VARCHAR" />
+    <result column="overdue_duration" property="overdueDuration" jdbcType="VARCHAR" />
+    <result column="overdue_status" property="overdueStatus" jdbcType="VARCHAR" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="personal_address" property="personalAddress" jdbcType="VARCHAR" />
+    <result column="overdue_times" property="overdueTimes" jdbcType="CHAR" />
+    <result column="ishide" property="ishide" jdbcType="CHAR" />
+    <result column="hide_time" property="hideTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sinoId, overdue_start_time, reason, public_time, sino_cardid, phone, email, live_address, 
+    overdue_money, loan_location, loan_type, loan_start_time, loan_guarantee, overdue_duration, 
+    overdue_status, user_account, personal_address, overdue_times, ishide, hide_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sinoway.cisp.entitys.BlacklistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blacklist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from blacklist
+    where sinoId = #{sinoid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from blacklist
+    where sinoId = #{sinoid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sinoway.cisp.entitys.BlacklistExample" >
+    delete from blacklist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sinoway.cisp.entitys.Blacklist" >
+    insert into blacklist (sinoId, overdue_start_time, reason, 
+      public_time, sino_cardid, phone, 
+      email, live_address, overdue_money, 
+      loan_location, loan_type, loan_start_time, 
+      loan_guarantee, overdue_duration, overdue_status, 
+      user_account, personal_address, overdue_times, 
+      ishide, hide_time)
+    values (#{sinoid,jdbcType=VARCHAR}, #{overdueStartTime,jdbcType=TIMESTAMP}, #{reason,jdbcType=VARCHAR}, 
+      #{publicTime,jdbcType=TIMESTAMP}, #{sinoCardid,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{liveAddress,jdbcType=VARCHAR}, #{overdueMoney,jdbcType=DECIMAL}, 
+      #{loanLocation,jdbcType=VARCHAR}, #{loanType,jdbcType=VARCHAR}, #{loanStartTime,jdbcType=TIMESTAMP}, 
+      #{loanGuarantee,jdbcType=VARCHAR}, #{overdueDuration,jdbcType=VARCHAR}, #{overdueStatus,jdbcType=VARCHAR}, 
+      #{userAccount,jdbcType=VARCHAR}, #{personalAddress,jdbcType=VARCHAR}, #{overdueTimes,jdbcType=CHAR}, 
+      #{ishide,jdbcType=CHAR}, #{hideTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinoway.cisp.entitys.Blacklist" >
+    insert into blacklist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sinoid != null" >
+        sinoId,
+      </if>
+      <if test="overdueStartTime != null" >
+        overdue_start_time,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="publicTime != null" >
+        public_time,
+      </if>
+      <if test="sinoCardid != null" >
+        sino_cardid,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="liveAddress != null" >
+        live_address,
+      </if>
+      <if test="overdueMoney != null" >
+        overdue_money,
+      </if>
+      <if test="loanLocation != null" >
+        loan_location,
+      </if>
+      <if test="loanType != null" >
+        loan_type,
+      </if>
+      <if test="loanStartTime != null" >
+        loan_start_time,
+      </if>
+      <if test="loanGuarantee != null" >
+        loan_guarantee,
+      </if>
+      <if test="overdueDuration != null" >
+        overdue_duration,
+      </if>
+      <if test="overdueStatus != null" >
+        overdue_status,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="personalAddress != null" >
+        personal_address,
+      </if>
+      <if test="overdueTimes != null" >
+        overdue_times,
+      </if>
+      <if test="ishide != null" >
+        ishide,
+      </if>
+      <if test="hideTime != null" >
+        hide_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sinoid != null" >
+        #{sinoid,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueStartTime != null" >
+        #{overdueStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="publicTime != null" >
+        #{publicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sinoCardid != null" >
+        #{sinoCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="liveAddress != null" >
+        #{liveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueMoney != null" >
+        #{overdueMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="loanLocation != null" >
+        #{loanLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="loanType != null" >
+        #{loanType,jdbcType=VARCHAR},
+      </if>
+      <if test="loanStartTime != null" >
+        #{loanStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanGuarantee != null" >
+        #{loanGuarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueDuration != null" >
+        #{overdueDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueStatus != null" >
+        #{overdueStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="personalAddress != null" >
+        #{personalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueTimes != null" >
+        #{overdueTimes,jdbcType=CHAR},
+      </if>
+      <if test="ishide != null" >
+        #{ishide,jdbcType=CHAR},
+      </if>
+      <if test="hideTime != null" >
+        #{hideTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sinoway.cisp.entitys.BlacklistExample" resultType="java.lang.Integer" >
+    select count(*) from blacklist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update blacklist
+    <set >
+      <if test="record.sinoid != null" >
+        sinoId = #{record.sinoid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueStartTime != null" >
+        overdue_start_time = #{record.overdueStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicTime != null" >
+        public_time = #{record.publicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sinoCardid != null" >
+        sino_cardid = #{record.sinoCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liveAddress != null" >
+        live_address = #{record.liveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueMoney != null" >
+        overdue_money = #{record.overdueMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loanLocation != null" >
+        loan_location = #{record.loanLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanType != null" >
+        loan_type = #{record.loanType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanStartTime != null" >
+        loan_start_time = #{record.loanStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loanGuarantee != null" >
+        loan_guarantee = #{record.loanGuarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueDuration != null" >
+        overdue_duration = #{record.overdueDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueStatus != null" >
+        overdue_status = #{record.overdueStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalAddress != null" >
+        personal_address = #{record.personalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueTimes != null" >
+        overdue_times = #{record.overdueTimes,jdbcType=CHAR},
+      </if>
+      <if test="record.ishide != null" >
+        ishide = #{record.ishide,jdbcType=CHAR},
+      </if>
+      <if test="record.hideTime != null" >
+        hide_time = #{record.hideTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update blacklist
+    set sinoId = #{record.sinoid,jdbcType=VARCHAR},
+      overdue_start_time = #{record.overdueStartTime,jdbcType=TIMESTAMP},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      public_time = #{record.publicTime,jdbcType=TIMESTAMP},
+      sino_cardid = #{record.sinoCardid,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      live_address = #{record.liveAddress,jdbcType=VARCHAR},
+      overdue_money = #{record.overdueMoney,jdbcType=DECIMAL},
+      loan_location = #{record.loanLocation,jdbcType=VARCHAR},
+      loan_type = #{record.loanType,jdbcType=VARCHAR},
+      loan_start_time = #{record.loanStartTime,jdbcType=TIMESTAMP},
+      loan_guarantee = #{record.loanGuarantee,jdbcType=VARCHAR},
+      overdue_duration = #{record.overdueDuration,jdbcType=VARCHAR},
+      overdue_status = #{record.overdueStatus,jdbcType=VARCHAR},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      personal_address = #{record.personalAddress,jdbcType=VARCHAR},
+      overdue_times = #{record.overdueTimes,jdbcType=CHAR},
+      ishide = #{record.ishide,jdbcType=CHAR},
+      hide_time = #{record.hideTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinoway.cisp.entitys.Blacklist" >
+    update blacklist
+    <set >
+      <if test="overdueStartTime != null" >
+        overdue_start_time = #{overdueStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="publicTime != null" >
+        public_time = #{publicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sinoCardid != null" >
+        sino_cardid = #{sinoCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="liveAddress != null" >
+        live_address = #{liveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueMoney != null" >
+        overdue_money = #{overdueMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="loanLocation != null" >
+        loan_location = #{loanLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="loanType != null" >
+        loan_type = #{loanType,jdbcType=VARCHAR},
+      </if>
+      <if test="loanStartTime != null" >
+        loan_start_time = #{loanStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanGuarantee != null" >
+        loan_guarantee = #{loanGuarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueDuration != null" >
+        overdue_duration = #{overdueDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueStatus != null" >
+        overdue_status = #{overdueStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="personalAddress != null" >
+        personal_address = #{personalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueTimes != null" >
+        overdue_times = #{overdueTimes,jdbcType=CHAR},
+      </if>
+      <if test="ishide != null" >
+        ishide = #{ishide,jdbcType=CHAR},
+      </if>
+      <if test="hideTime != null" >
+        hide_time = #{hideTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sinoId = #{sinoid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinoway.cisp.entitys.Blacklist" >
+    update blacklist
+    set overdue_start_time = #{overdueStartTime,jdbcType=TIMESTAMP},
+      reason = #{reason,jdbcType=VARCHAR},
+      public_time = #{publicTime,jdbcType=TIMESTAMP},
+      sino_cardid = #{sinoCardid,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      live_address = #{liveAddress,jdbcType=VARCHAR},
+      overdue_money = #{overdueMoney,jdbcType=DECIMAL},
+      loan_location = #{loanLocation,jdbcType=VARCHAR},
+      loan_type = #{loanType,jdbcType=VARCHAR},
+      loan_start_time = #{loanStartTime,jdbcType=TIMESTAMP},
+      loan_guarantee = #{loanGuarantee,jdbcType=VARCHAR},
+      overdue_duration = #{overdueDuration,jdbcType=VARCHAR},
+      overdue_status = #{overdueStatus,jdbcType=VARCHAR},
+      user_account = #{userAccount,jdbcType=VARCHAR},
+      personal_address = #{personalAddress,jdbcType=VARCHAR},
+      overdue_times = #{overdueTimes,jdbcType=CHAR},
+      ishide = #{ishide,jdbcType=CHAR},
+      hide_time = #{hideTime,jdbcType=TIMESTAMP}
+    where sinoId = #{sinoid,jdbcType=VARCHAR}
+  </update>
+</mapper>

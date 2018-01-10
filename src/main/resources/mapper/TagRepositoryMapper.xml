@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinoway.cisp.dao.TagRepositoryMapper" >
+  <resultMap id="BaseResultMap" type="com.sinoway.cisp.entitys.TagRepository" >
+    <id column="tag_id" property="tagId" jdbcType="INTEGER" />
+    <result column="sinoid" property="sinoid" jdbcType="VARCHAR" />
+    <result column="table_name" property="tableName" jdbcType="CHAR" />
+    <result column="tag_code" property="tagCode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tag_id, sinoid, table_name, tag_code, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sinoway.cisp.entitys.TagRepositoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tag_repository
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tag_repository
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tag_repository
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sinoway.cisp.entitys.TagRepositoryExample" >
+    delete from tag_repository
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sinoway.cisp.entitys.TagRepository" >
+    insert into tag_repository (tag_id, sinoid, table_name, 
+      tag_code, create_time)
+    values (#{tagId,jdbcType=INTEGER}, #{sinoid,jdbcType=VARCHAR}, #{tableName,jdbcType=CHAR}, 
+      #{tagCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinoway.cisp.entitys.TagRepository" >
+    insert into tag_repository
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tagId != null" >
+        tag_id,
+      </if>
+      <if test="sinoid != null" >
+        sinoid,
+      </if>
+      <if test="tableName != null" >
+        table_name,
+      </if>
+      <if test="tagCode != null" >
+        tag_code,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tagId != null" >
+        #{tagId,jdbcType=INTEGER},
+      </if>
+      <if test="sinoid != null" >
+        #{sinoid,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=CHAR},
+      </if>
+      <if test="tagCode != null" >
+        #{tagCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sinoway.cisp.entitys.TagRepositoryExample" resultType="java.lang.Integer" >
+    select count(*) from tag_repository
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tag_repository
+    <set >
+      <if test="record.tagId != null" >
+        tag_id = #{record.tagId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sinoid != null" >
+        sinoid = #{record.sinoid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableName != null" >
+        table_name = #{record.tableName,jdbcType=CHAR},
+      </if>
+      <if test="record.tagCode != null" >
+        tag_code = #{record.tagCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tag_repository
+    set tag_id = #{record.tagId,jdbcType=INTEGER},
+      sinoid = #{record.sinoid,jdbcType=VARCHAR},
+      table_name = #{record.tableName,jdbcType=CHAR},
+      tag_code = #{record.tagCode,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinoway.cisp.entitys.TagRepository" >
+    update tag_repository
+    <set >
+      <if test="sinoid != null" >
+        sinoid = #{sinoid,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        table_name = #{tableName,jdbcType=CHAR},
+      </if>
+      <if test="tagCode != null" >
+        tag_code = #{tagCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinoway.cisp.entitys.TagRepository" >
+    update tag_repository
+    set sinoid = #{sinoid,jdbcType=VARCHAR},
+      table_name = #{tableName,jdbcType=CHAR},
+      tag_code = #{tagCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </update>
+  <select id="findTagBySinoidList" resultMap="BaseResultMap">
+    SELECT tag_code,table_name from tag_repository WHERE sinoid in
+    <foreach collection="list" item="sinoid" index="index" open="(" close=")" separator=",">
+            #{sinoid}
+    </foreach>
+  </select>
+</mapper>

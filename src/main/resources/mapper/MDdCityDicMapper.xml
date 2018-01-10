@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinoway.cisp.dao.MDdCityDicMapper" >
+  <resultMap id="BaseResultMap" type="com.sinoway.cisp.entitys.MDdCityDic" >
+    <id column="c_code" property="cCode" jdbcType="VARCHAR" />
+    <result column="s_code" property="sCode" jdbcType="VARCHAR" />
+    <result column="s_name" property="sName" jdbcType="VARCHAR" />
+    <result column="c_name" property="cName" jdbcType="VARCHAR" />
+    <result column="x_level" property="xLevel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    c_code, s_code, s_name, c_name, x_level
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sinoway.cisp.entitys.MDdCityDicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from m_dd_city_dic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from m_dd_city_dic
+    where c_code = #{cCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from m_dd_city_dic
+    where c_code = #{cCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sinoway.cisp.entitys.MDdCityDicExample" >
+    delete from m_dd_city_dic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sinoway.cisp.entitys.MDdCityDic" >
+    insert into m_dd_city_dic (c_code, s_code, s_name, 
+      c_name, x_level)
+    values (#{cCode,jdbcType=VARCHAR}, #{sCode,jdbcType=VARCHAR}, #{sName,jdbcType=VARCHAR}, 
+      #{cName,jdbcType=VARCHAR}, #{xLevel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinoway.cisp.entitys.MDdCityDic" >
+    insert into m_dd_city_dic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cCode != null" >
+        c_code,
+      </if>
+      <if test="sCode != null" >
+        s_code,
+      </if>
+      <if test="sName != null" >
+        s_name,
+      </if>
+      <if test="cName != null" >
+        c_name,
+      </if>
+      <if test="xLevel != null" >
+        x_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cCode != null" >
+        #{cCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sCode != null" >
+        #{sCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="xLevel != null" >
+        #{xLevel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sinoway.cisp.entitys.MDdCityDicExample" resultType="java.lang.Integer" >
+    select count(*) from m_dd_city_dic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update m_dd_city_dic
+    <set >
+      <if test="record.cCode != null" >
+        c_code = #{record.cCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sCode != null" >
+        s_code = #{record.sCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sName != null" >
+        s_name = #{record.sName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cName != null" >
+        c_name = #{record.cName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xLevel != null" >
+        x_level = #{record.xLevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update m_dd_city_dic
+    set c_code = #{record.cCode,jdbcType=VARCHAR},
+      s_code = #{record.sCode,jdbcType=VARCHAR},
+      s_name = #{record.sName,jdbcType=VARCHAR},
+      c_name = #{record.cName,jdbcType=VARCHAR},
+      x_level = #{record.xLevel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinoway.cisp.entitys.MDdCityDic" >
+    update m_dd_city_dic
+    <set >
+      <if test="sCode != null" >
+        s_code = #{sCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null" >
+        s_name = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null" >
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="xLevel != null" >
+        x_level = #{xLevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_code = #{cCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinoway.cisp.entitys.MDdCityDic" >
+    update m_dd_city_dic
+    set s_code = #{sCode,jdbcType=VARCHAR},
+      s_name = #{sName,jdbcType=VARCHAR},
+      c_name = #{cName,jdbcType=VARCHAR},
+      x_level = #{xLevel,jdbcType=VARCHAR}
+    where c_code = #{cCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

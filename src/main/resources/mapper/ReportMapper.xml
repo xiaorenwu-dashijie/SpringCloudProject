@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinoway.cisp.dao.ReportMapper" >
+  <resultMap id="BaseResultMap" type="com.sinoway.cisp.entitys.LoanApplication" >
+    <id column="sinoid" property="sinoid" jdbcType="VARCHAR" />
+    <result column="sino_cardid" property="sinoCardid" jdbcType="VARCHAR" />
+    <result column="request_time" property="requestTime" jdbcType="TIMESTAMP" />
+    <result column="request_money" property="requestMoney" jdbcType="DECIMAL" />
+    <result column="request_location" property="requestLocation" jdbcType="VARCHAR" />
+    <result column="request_type" property="requestType" jdbcType="CHAR" />
+    <result column="sinotime" property="sinotime" jdbcType="TIMESTAMP" />
+    <result column="edu" property="edu" jdbcType="CHAR" />
+    <result column="request_result" property="requestResult" jdbcType="CHAR" />
+    <result column="refuse_reason" property="refuseReason" jdbcType="CHAR" />
+  </resultMap>
+</mapper>
